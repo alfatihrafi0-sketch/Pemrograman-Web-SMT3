@@ -13,11 +13,31 @@ function initNavToggle() {
 // Memakai event delegation di document karena baris tabel sekarang
 // dirender dinamis via fetch (lihat buku.js/anggota.js) sehingga
 // tombol .btn-hapus belum tentu ada saat DOMContentLoaded.
+// function initHapusConfirm() {
+//     document.addEventListener("click", function (e) {
+//         const btn = e.target.closest(".btn-hapus");
+//         if (!btn) return;
+
+//         const row = btn.closest("tr");
+//         const nama = row ? row.querySelector("td")?.textContent : "data ini";
+//         const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
+//         if (yakin && row) {
+//             row.remove();
+//         }
+//     });
+// }
+
 function initHapusConfirm() {
     document.addEventListener("click", function (e) {
+        console.log("Elemen yang di-klik saat ini:", e.target);
+
+        // Apakah elemen yang diklik (atau komponen terdekatnya) adalah tombol hapus?
         const btn = e.target.closest(".btn-hapus");
+        
+        // Jika yang diklik bukan tombol hapus, abaikan (stop eksekusi fungsi ke bawah)
         if (!btn) return;
 
+        // Jika benar tombol hapus, jalankan logika hapus baris tabel seperti biasa
         const row = btn.closest("tr");
         const nama = row ? row.querySelector("td")?.textContent : "data ini";
         const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");

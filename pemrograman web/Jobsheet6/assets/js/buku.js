@@ -1,4 +1,23 @@
-// Mengambil & menampilkan Daftar Buku secara asinkron dari data/buku.json
+// // Mengambil & menampilkan Daftar Buku secara asinkron dari data/buku.json
+// async function muatDaftarBuku() {
+//     const tbody = document.querySelector(".table-responsive table tbody");
+//     const loading = document.getElementById("loading-indicator");
+//     if (!tbody) return;
+
+//     loading.style.display = "block";
+//     tbody.innerHTML = "";
+
+//     try {
+
+// Fungsi Generik 
+async function ambilDataApi(urlPath) {
+    const res = await fetch(urlPath);
+    if (!res.ok) {
+        throw new Error("Gagal mengambil data (status " + res.status + ")");
+    }
+    return await res.json();
+}
+// Fungsi khusus daftar buku
 async function muatDaftarBuku() {
     const tbody = document.querySelector(".table-responsive table tbody");
     const loading = document.getElementById("loading-indicator");
@@ -8,14 +27,13 @@ async function muatDaftarBuku() {
     tbody.innerHTML = "";
 
     try {
-        // simulasi delay jaringan agar loading indicator terlihat
-        await new Promise((resolve) => setTimeout(resolve, 600));
 
-        const res = await fetch("../data/buku.json");
-        if (!res.ok) {
-            throw new Error("Gagal mengambil data (status " + res.status + ")");
-        }
-        const daftarBuku = await res.json();
+         // Simulasi delay jaringan
+        // await new Promise((resolve) => setTimeout(resolve, 600));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        // Memanggil fungsi generik dengan memasukkan path file JSON buku
+        const daftarBuku = await ambilDataApi("../data/buku.json");
 
         daftarBuku.forEach(function (buku) {
             const tr = document.createElement("tr");
@@ -24,6 +42,7 @@ async function muatDaftarBuku() {
                 "<td>" + buku.pengarang + "</td>" +
                 "<td>" + buku.tahun + "</td>" +
                 "<td>" + buku.stok + "</td>" +
+                "<td>" + buku.kategori + "</td>" + 
                 "<td>" +
                 "<button type=\"button\">Edit</button> " +
                 "<button type=\"button\" class=\"btn-hapus\">Hapus</button>" +
@@ -32,11 +51,25 @@ async function muatDaftarBuku() {
         });
     } catch (err) {
         tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " + err.message + "</td></tr>";
+            "<tr><td colspan=\"6\">Gagal memuat data: " + err.message + "</td></tr>";
     } finally {
         loading.style.display = "none";
     }
 }
 
-document.addEventListener("DOMContentLoaded", muatDaftarBuku);
+// Tambahkan fungsi listener untuk tombol refresh
+function initTombolRefresh() {
+    const btnRefresh = document.getElementById("btn-refresh");
+    if (btnRefresh) {
+        btnRefresh.addEventListener("click", function () {
+            // Memanggil ulang fungsi muatDaftarBuku yang sudah ada di atas
+            muatDaftarBuku(); 
+        });
+    }
+}
 
+// Menjalankan fungsi pemicu saat dokumen html selesai dimuat 
+document.addEventListener("DOMContentLoaded", function () {
+    muatDaftarBuku();
+    initTombolRefresh();
+});
