@@ -27,4 +27,8 @@ include __DIR__ . '/includes/header.php';
     </article>
 </section>
 
+<form action="reset.php" method="post">
+    <button type="submit">Reset Data</button>
+</form>
+
 <?php include __DIR__ . '/includes/footer.php'; ?>

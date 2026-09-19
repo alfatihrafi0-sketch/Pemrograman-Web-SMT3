@@ -20,6 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($isbn !== '' && !preg_match('/^[0-9-]+$/', $isbn)) {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'message' => 'ISBN hanya boleh berisi angka dan tanda hubung.'
+    ];
+
+    header('Location: tambah.php');
+    exit;
+}
+
     $buku = [
         'judul' => $judul,
         'pengarang' => $pengarang,

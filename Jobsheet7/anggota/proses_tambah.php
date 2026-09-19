@@ -19,6 +19,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if ($no_hp !== '' && !preg_match('/^[0-9+\-\s()]+$/', $no_hp)) {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'message' => 'No. HP hanya boleh berisi angka dan karakter nomor telepon yang valid.'
+    ];
+
+    header('Location: tambah.php');
+    exit;
+    }
+
+    if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'message' => 'Format email tidak valid.'
+    ];
+
+    header('Location: tambah.php');
+    exit;
+    }
+
     $anggota = [
         'nama' => $nama,
         'no_anggota' => $no_anggota,
