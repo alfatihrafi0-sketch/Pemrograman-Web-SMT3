@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SIMPUS-Mini</title>
+
+    <!- menghubungkan ke file css utama anda ->
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <header>
+        <h1>SIMPUS-Mini</h1>
+    </header>
+
+    <main style="padding: 20px; display: flex; justify-content: center;">
+
+        <!- Kotak utama form login ->
+        <div style="background: #f9f9f9; padding: 30px; border: 1px solid #ccc; border-radius: 5px; width: 100%; max-width: 400px;">
+            <h2 style="text-align: center; margin-bottom: 20px;">Halaman Login Petugas</h2>
+            
+            <form action="#" method="POST">
+                <!- field username ->
+                <div style="margin-bottom: 15px;">
+                    <label for="username" style="display: block; margin-bottom: 5px; font-weight: bold;">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Masukkan Username" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <!- field password (menggunakan input type="password") ->
+                <div style="margin-bottom: 20px;">
+                    <label for="password" style="display: block; margin-bottom: 5px; font-weight: bold;">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan Password" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <!- tombol login ->
+                <button type="submit" style="width: 100%; padding: 10px; background-color: #333; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;"> LOGIN
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 15px; margin-top: 20px; border-top: 1px solid #ccc;">
+        <p>&copy; 2026 SIMPUS-Mini Development Team</p>
+    </footer>
+
+</body>
+</html>
