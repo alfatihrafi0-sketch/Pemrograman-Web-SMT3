@@ -34,7 +34,7 @@ if (!$buku) {
         </p>
     <?php endif; ?>
 
-    <form id="form-tambah" method="post" action="proses_edit.php">
+    <form id="form-tambah" method="post" action="proses_edit.php" onsubmit="return confirm('Yakin ingin menyimpan perubahan data buku ini?');">
 
         <input type="hidden" name="id" value="<?php echo $buku['id']; ?>">
 
