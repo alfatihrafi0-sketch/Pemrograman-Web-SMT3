@@ -47,6 +47,13 @@ unset($_SESSION['flash']);
         </p>
 
         <p>
+            <label>
+                <input type="checkbox" name="remember" value="1">
+                Ingat Saya
+            </label>
+        </p>
+
+        <p>
             <button type="submit">Masuk</button>
         </p>
 
