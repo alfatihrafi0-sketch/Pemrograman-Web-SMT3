@@ -1,7 +1,9 @@
 <?php
-$page_title = "Daftar Buku";
-
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/csrf.php';
 require_once __DIR__ . '/../includes/koneksi.php';
+
+$page_title = "Daftar Buku";
 
 $perPage = 10;
 $page = max(1, (int) ($_GET['page'] ?? 1));

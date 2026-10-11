@@ -9,7 +9,8 @@ $page_title = "Pengembalian Buku";
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-$sqlDasar = "SELECT p.id, b.judul, a.nama, p.tanggal_pinjam
+$sqlDasar = "SELECT p.id, b.judul, a.nama,
+                    p.tanggal_pinjam, p.tanggal_jatuh_tempo
              FROM peminjaman p
              JOIN buku b ON b.id = p.buku_id
              JOIN anggota a ON a.id = p.anggota_id
@@ -39,13 +40,14 @@ include __DIR__ . '/../includes/header.php';
 
     <table>
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Anggota</th>
-                <th>Judul Buku</th>
-                <th>Tanggal Pinjam</th>
-                <th>Aksi</th>
-            </tr>
+    <tr>
+        <th>ID</th>
+        <th>Nama Anggota</th>
+        <th>Judul Buku</th>
+        <th>Tanggal Pinjam</th>
+        <th>Tanggal Jatuh Tempo</th>
+        <th>Aksi</th>
+    </tr>
         </thead>
 
         <tbody>
@@ -63,6 +65,10 @@ include __DIR__ . '/../includes/header.php';
 
                     <td>
                         <?php echo e($peminjaman['tanggal_pinjam']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo e($peminjaman['tanggal_jatuh_tempo'] ?? '-'); ?>
                     </td>
 
                     <td>

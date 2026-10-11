@@ -15,16 +15,18 @@ $riwayat = [];
 
 if ($anggotaId !== '') {
 
-    $stmt = $pdo->prepare(
-        "SELECT b.judul,
-                p.tanggal_pinjam,
-                p.tanggal_kembali,
-                p.status
-         FROM peminjaman p
-         JOIN buku b ON b.id = p.buku_id
-         WHERE p.anggota_id = :id
-         ORDER BY p.tanggal_pinjam DESC"
-    );
+   $stmt = $pdo->prepare(
+    "SELECT b.judul,
+            a.no_hp,
+            p.tanggal_pinjam,
+            p.tanggal_kembali,
+            p.status
+     FROM peminjaman p
+     JOIN buku b ON b.id = p.buku_id
+     JOIN anggota a ON a.id = p.anggota_id
+     WHERE p.anggota_id = :id
+     ORDER BY p.tanggal_pinjam DESC"
+);
 
     $stmt->execute([
         'id' => $anggotaId
@@ -80,23 +82,27 @@ include __DIR__ . '/../includes/header.php';
 
         <table>
 
-            <thead>
-                <tr>
-                    <th>Judul Buku</th>
-                    <th>Tanggal Pinjam</th>
-                    <th>Tanggal Kembali</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
+        <thead>
+    <tr>
+        <th>Judul Buku</th>
+        <th>No. HP Anggota</th>
+        <th>Tanggal Pinjam</th>
+        <th>Tanggal Kembali</th>
+        <th>Status</th>
+    </tr>
+        </thead>
 
             <tbody>
 
                 <?php foreach ($riwayat as $r): ?>
 
                     <tr>
-
                         <td>
                             <?php echo e($r['judul']); ?>
+                        </td>
+
+                        <td>
+                            <?php echo e($r['no_hp'] ?? '-'); ?>
                         </td>
 
                         <td>
